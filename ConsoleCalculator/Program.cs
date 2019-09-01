@@ -8,44 +8,119 @@ namespace ConsoleCalculator
     {
         static void Main()
         {
-            Console.Write("Type the operation you want to execute (sum, subtract, multiply, divide): ... ");
-            var result = Console.ReadLine();
+            Console.Write("Please select your preferred language (English or Bulgarian): ");
+            var languageSet = Console.ReadLine().ToLower();
+            var resultEnums = Enum.GetNames(typeof(Languages));
+            languageSet = StringExtensions.FirstCharToUpper(languageSet);
+            var result = String.Empty;
+            var firstOperand = String.Empty;
+            var secondOperand = String.Empty;
+            var colorOfConsole = String.Empty;
 
-            Console.Write("Please type the first operand: ");
-            var n1 = Console.ReadLine();
+            if (resultEnums.Contains(languageSet))
+            {
+                if (languageSet == "Bulgarian")
+                {
+                    Console.Write("Напишете желаното действие (събиране, изваждане, умножение, деление): ... ");
+                    result = Console.ReadLine();
 
-            Console.Write("Now, Please type the second operand: ");
-            var n2 = Console.ReadLine();
+                    Console.Write("Попълнете първото число: ");
+                    firstOperand = Console.ReadLine();
 
+                    Console.Write("Сега, моля попълнете второто число: ");
+                    secondOperand = Console.ReadLine();
+
+                    Console.Write("Сега, моля въведете желания цвят от вас, по който да ви се покаже конзолата (Черен, Тъмносин, Тъмнозелен, Циан, Тъмночервен, Пурпурен, Тъмножълт, Сив, Тъмносив, Син, Зелен, Червен, Жълт, Бял): ");
+                    colorOfConsole = Console.ReadLine().ToLower();
+                    switch (colorOfConsole)
+                    {
+                        case "черен":
+                            colorOfConsole = "Black";
+                            break;
+                        case "тъмносин":
+                            colorOfConsole = "DarkBlue";
+                            break;
+                        case "тъмнозелен":
+                            colorOfConsole = "DarkGreen";
+                            break;
+                        case "циан":
+                            colorOfConsole = "Cyan";
+                            break;
+                        case "тъмночервен":
+                            colorOfConsole = "DarkRed";
+                            break;
+                        case "пурпурен":
+                            colorOfConsole = "Magenta";
+                            break;
+                        case "тъмножълт":
+                            colorOfConsole = "DarkYellow";
+                            break;
+                        case "сив":
+                            colorOfConsole = "Gray";
+                            break;
+                        case "тъмносив":
+                            colorOfConsole = "DarkGray";
+                            break;
+                        case "син":
+                            colorOfConsole = "Blue";
+                            break;
+                        case "зелен":
+                            colorOfConsole = "Green";
+                            break;
+                        case "червен":
+                            colorOfConsole = "Red";
+                            break;
+                        case "жълт":
+                            colorOfConsole = "Yellow";
+                            break;
+                        case "бял":
+                            colorOfConsole = "White";
+                            break;
+                    }
+                }
+                else {
+                    Console.Write("Type the operation you want to execute (sum, subtract, multiply, divide): ... ");
+                    result = Console.ReadLine();
+
+                    Console.Write("Please type the first operand: ");
+                    firstOperand = Console.ReadLine();
+
+                    Console.Write("Now, Please type the second operand: ");
+                    secondOperand = Console.ReadLine();
+
+                    Console.Write("Now, Please type the desired color of the results (Black, DarkBlue, DarkGreen, DarkCyan, DarkRed, DarkMagenta, DarkYellow, Gray, DarkGray, Blue, Green, Cyan, Red, Magenta, Yellow, White): ");
+                    colorOfConsole = Console.ReadLine();
+                }
+            }
             var calculator = new Calculator();
 
 
 
-            if (result == "sum")
+            if (result == "sum" || result == "събиране")
             {
-                calculator.color = ConsoleColor.Red;
-                calculator.Sum(Convert.ToDouble(n1), Convert.ToDouble(n2));
+                calculator.Color(colorOfConsole.ToLower());
+                calculator.Sum(Convert.ToDouble(firstOperand), Convert.ToDouble(secondOperand));
             }
             else
             {
-                if (result == "subtract")
+                if (result == "subtract" || result == "изваждане")
                 {
-                    calculator.color = ConsoleColor.Red;
-                    calculator.Subtract(Convert.ToDouble(n1), Convert.ToDouble(n2));
+                    calculator.Color(colorOfConsole.ToLower());
+                    calculator.Subtract(Convert.ToDouble(firstOperand), Convert.ToDouble(secondOperand));
                 }
                 else
                 {
-                    if (result == "multiply")
+                    if (result == "multiply" || result == "умножение")
                     {
-                        calculator.color = ConsoleColor.Red;
-                        calculator.Multiply(Convert.ToDouble(n1), Convert.ToDouble(n2));
+                        calculator.Color(colorOfConsole.ToLower());
+                        calculator.Multiply(Convert.ToDouble(firstOperand), Convert.ToDouble(secondOperand));
                     }
                     else
                     {
-                        if (result == "divide")
+                        if (result == "divide" || result == "деление")
                         {
-                            calculator.color = ConsoleColor.Red;
-                            calculator.Divide(Convert.ToDouble(n1), Convert.ToDouble(n2));
+                            calculator.Color(colorOfConsole.ToLower());
+                            calculator.Divide(Convert.ToDouble(firstOperand), Convert.ToDouble(secondOperand));
                         }
                     }
                 }
